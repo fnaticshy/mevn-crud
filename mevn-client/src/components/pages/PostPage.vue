@@ -2,16 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Posts</h1>
-                <h3>This file will list all the posts</h3>
-
                 <section
                      v-if="posts.length"
                      class="panel.panel-success"
                 >
-                    <div class="panel-heading">
-                        list of posts
-                    </div>
+                    <h3 class="panel-heading">
+                        List of posts:
+                    </h3>
                     <table class="table table-striped">
                         <tr>
                             <th>Title</th>
@@ -24,13 +21,40 @@
                         >
                             <td>{{ post.title }}</td>
                             <td>{{ post.description }}</td>
+                            <td>
+                                <router-link
+                                     tag="button"
+                                     class="btn btn-warning btn-sm mr-2"
+                                    :to="{ name: 'EditPost', params: { id: post._id } }"
+                                >
+                                    edit post
+                                </router-link>
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    type="button"
+                                    @click="removePost(post._id)"
+                                >
+                                    delete
+                                </button>
+                            </td>
                         </tr>
                     </table>
+                    <div>
+                        <router-link
+                            tag="button"
+                            class="btn btn-success btn-sm mr-2"
+                            :to="{ name: 'NewPost' }"
+                        >Create Post</router-link>
+                    </div>
                 </section>
                 <section v-else>
                     <p>There are no posts ... Lets add one now!</p>
                     <div>
-                        <router-link :to="{ name: 'NewPost' }"></router-link>
+                        <router-link
+                                tag="button"
+                                class="btn btn-success btn-sm mr-2"
+                                :to="{ name: 'NewPost' }"
+                        >Create Post</router-link>
                     </div>
                 </section>
 
@@ -53,6 +77,11 @@
             async getPosts () {
                 const response = await PostsService.fetchPosts()
                 this.posts = response.data.posts
+            },
+            async removePost (value) {
+                console.log(value)
+                await PostsService.deletePost(value)
+                this.getPosts()
             }
         },
         mounted () {
@@ -60,7 +89,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

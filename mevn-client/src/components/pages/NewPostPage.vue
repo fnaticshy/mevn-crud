@@ -24,21 +24,21 @@
                             v-model.trim="post.description"
                         >
                     </div>
-                    <div class="form-group">
-                        <button
+                    <button
                             class="btn btn-block btn-primary"
                             type="submit"
                             name="addPost"
                             id="addPost"
-                        >add new post</button>
-                    </div>
-                    <section>
-                        <button
+                    >
+                        add new post
+                    </button>
+                    <button
                             class="btn btn-success btn-block"
                             type="button"
                             @click="goBack()"
-                        >go to posts page</button>
-                    </section>
+                    >
+                        go to posts page
+                    </button>
                 </form>
             </div>
         </div>

@@ -18,6 +18,11 @@ const routes = [
         path: '/posts/new',
         name: 'NewPost',
         component: () => import("@/components/pages/NewPostPage")
+    },
+    {
+        path: '/posts/:id',
+        name: 'EditPost',
+        component: () => import("@/components/pages/EditPostPage")
     }
 ]
 
